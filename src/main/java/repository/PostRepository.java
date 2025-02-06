@@ -11,7 +11,7 @@ import java.util.stream.Collectors;
 // Stub
 public class PostRepository {
     private Map<Long, Post> postMap = new ConcurrentHashMap<>();
-    long count = 1;
+    AtomicLong count = new AtomicLong(1);
 
     public List<Post> all() {
         return postMap.values().stream().collect(Collectors.toList());
@@ -24,8 +24,8 @@ public class PostRepository {
     public Post save(Post post) {
         if (post.getId() == 0) {
             AtomicLong newID = new AtomicLong();
-            newID.set(count);
-            count++;
+            newID.set(count.get());
+            count.getAndIncrement();
             post.setId(newID.get());
             return postMap.put(newID.get(), post);
         } else {
