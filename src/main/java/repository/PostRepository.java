@@ -5,6 +5,7 @@ import model.Post;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 // Stub
@@ -22,10 +23,11 @@ public class PostRepository {
 
     public Post save(Post post) {
         if (post.getId() == 0) {
-            var newID = count;
+            AtomicLong newID = new AtomicLong();
+            newID.set(count);
             count++;
-            post.setId(newID);
-            return postMap.put(newID, post);
+            post.setId(newID.get());
+            return postMap.put(newID.get(), post);
         } else {
             return postMap.replace(post.getId(),post);
         }
