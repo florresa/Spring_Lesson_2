@@ -2,6 +2,7 @@ package service;
 
 import com.google.gson.Gson;
 import model.Post;
+import org.springframework.stereotype.Service;
 import repository.PostRepository;
 
 import javax.servlet.http.HttpServletResponse;
@@ -10,6 +11,7 @@ import java.util.List;
 
 import static controller.PostController.APPLICATION_JSON;
 
+@Service
 public class PostService {
     private final PostRepository repository;
 

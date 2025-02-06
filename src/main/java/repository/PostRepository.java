@@ -1,6 +1,7 @@
 package repository;
 
 import model.Post;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.concurrent.atomic.AtomicLong;
 import java.util.stream.Collectors;
 
 // Stub
+@Repository
 public class PostRepository {
     private Map<Long, Post> postMap = new ConcurrentHashMap<>();
     AtomicLong count = new AtomicLong(1);
